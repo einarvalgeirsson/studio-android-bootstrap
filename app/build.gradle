@@ -16,6 +16,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            /**
+             * run task createDebugCoverageReport to generate code coverage report for
+             * both unit and Espresso tests.
+             * The report are found in:
+             * unit -> root/app/build/reports/jacoco/testDebugUnitTestCoverage/
+             * espresso -> root/app/build/reports/coverage/debug/
+             **/
+            testCoverageEnabled = true
+        }
     }
 }
 
