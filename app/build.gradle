@@ -10,11 +10,18 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            /**
+             * Keep the Base URL to the API in BuildConfig in order to
+             * be able to switch it when running espresso tests with MockWebServer (see buildType "mock")
+             **/
+            buildConfigField('String', 'API_BASE_URL', '\"prod.api.customer.com\"')
         }
 
         debug {
@@ -26,6 +33,12 @@ android {
              * espresso -> root/app/build/reports/coverage/debug/
              **/
             testCoverageEnabled = true
+            buildConfigField('String', 'API_BASE_URL', '\"dev.api.customer.com\"')
+
+        }
+        mock {
+            testCoverageEnabled = true
+            buildConfigField('String', 'API_BASE_URL', '\"localhost:8080\"')
         }
     }
 }
